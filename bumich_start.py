@@ -26,6 +26,7 @@ async def clear(ctx, count=None):
     if finctions.may_be_class(count):
         count = int(count)
     else:
+
         await ctx.send('Некорректное кол-во')
         return
 
@@ -67,6 +68,7 @@ async def coin(ctx, count=None):
     if finctions.may_be_class(count):
         count = int(count)
     else:
+
         await ctx.send('Некорректное кол-во')
         return
 
@@ -155,6 +157,7 @@ async def roll(ctx, roll_first_number=None, roll_second_number=None, count=None)
     else:  roll_second_number = 1
 
     if finctions.may_be_class(count): count = abs(int(count))
+
     else:  count = 1
 
     # Проверка и замена для стабильной работы рандома
