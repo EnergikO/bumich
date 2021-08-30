@@ -21,6 +21,9 @@ async def clear(ctx, count=1):
     # Создаём видимость работы
     await ctx.trigger_typing()
 
+    # Сколько сообщений можно удалять НЕ админам/модераторам
+    max_delete_not_admin = 10
+
     # Проверка, ввели ли числа или нет
     if isinstance(count, int):
         user_top_role = ctx.message.author.top_role
@@ -31,7 +34,7 @@ async def clear(ctx, count=1):
 
         else:
             # Если малое кол-во, то можно удалить
-            if count <= 5:
+            if count <= max_delete_not_admin:
 
                 # Чтобы кто-то не удалил всё за 1500 сообщений в секунду
                 global time_last_purge
@@ -44,7 +47,8 @@ async def clear(ctx, count=1):
                 else:
                     await ctx.message.send('Прошло недостаточно времени')
             else:
-                await ctx.message.send('Нет права на удаления такого количества сообщений')
+                await ctx.message.send(f'Нет права на удаления такого количества сообщений, разрешено удалять '
+                                       f'{max_delete_not_admin} сообщений за раз')
     else:
         await ctx.message.send('Некорректное число')
 
