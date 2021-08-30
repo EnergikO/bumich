@@ -80,9 +80,9 @@ async def commands(ctx, command_name=None):
     # Создаём видимость работы
     await ctx.trigger_typing()
 
+    # Лист всех команд
     commands_name = ['clear', 'coin', 'commands / help', 'roll', 'stop']
 
-    # Лист всех команд
     if command_name is None:
         what_send = '```Вот, что я могу:\n'
         for command in commands_name:
