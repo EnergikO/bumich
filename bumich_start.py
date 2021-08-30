@@ -2,6 +2,7 @@ from random import randint
 from time import time
 from discord.ext import commands
 from settings import settings
+import finctions
 
 client = commands.Bot(command_prefix=settings['prefix'])
 
@@ -22,10 +23,9 @@ async def clear(ctx, count=None):
     await ctx.trigger_typing()
 
     # Проверка, ввели ли числа или нет
-    try:
+    if finctions.may_be_class(count):
         count = int(count)
-
-    except ValueError:
+    else:
         await ctx.send('Некорректное кол-во')
         return
 
@@ -64,10 +64,9 @@ async def coin(ctx, count=None):
     await ctx.trigger_typing()
 
     # Проверка, ввели ли числа или нет
-    try:
+    if finctions.may_be_class(count):
         count = int(count)
-
-    except ValueError:
+    else:
         await ctx.send('Некорректное кол-во')
         return
 
@@ -149,13 +148,13 @@ async def roll(ctx, roll_first_number=None, roll_second_number=None, count=None)
     # Проверка, что ввели, а что нет
     # То, что не ввели или ввели неверно значения возьмутся по умолчанию
 
-    if may_be_class(roll_first_number):  roll_first_number = int(roll_first_number)
+    if finctions.may_be_class(roll_first_number):  roll_first_number = int(roll_first_number)
     else:  roll_first_number = 100
 
-    if may_be_class(roll_second_number):  roll_second_number = int(roll_second_number)
+    if finctions.may_be_class(roll_second_number):  roll_second_number = int(roll_second_number)
     else:  roll_second_number = 1
 
-    if may_be_class(count): count = abs(int(count))
+    if finctions.may_be_class(count): count = abs(int(count))
     else:  count = 1
 
     # Проверка и замена для стабильной работы рандома
@@ -184,18 +183,5 @@ async def stop(ctx):
         exit()
     else:
         await ctx.send('Ты не мой братик, тебе нельзя мной командовать.')
-
-
-def may_be_class(value, class_name=int) -> bool:
-    if value is None:
-        return False
-
-    try:
-        value = class_name(value)
-        return True
-
-    except ValueError:
-        return False
-
 
 client.run(settings["token"])
