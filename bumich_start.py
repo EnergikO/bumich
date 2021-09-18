@@ -187,4 +187,5 @@ async def stop(ctx):
     else:
         await ctx.send('Ты не мой братик, тебе нельзя мной командовать.')
 
+
 client.run(settings["token"])
