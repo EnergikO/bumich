@@ -12,7 +12,12 @@ time_last_purge = 0  # Сколько секунд назад последний
 
 @client.event
 async def on_ready():
-    print(f"{settings['botName']} successful launch!")
+    print(f"{settings['bot_name']} successful launch!")
+
+
+@client.event
+async def on_message(message):
+    print(f'# ==== #\nOn channel: {message.guild.name}\nNew message: {message.content}\nMessage from: {message.channel}\n')
 
 
 @client.command()
