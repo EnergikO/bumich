@@ -2,7 +2,6 @@ from random import randint
 from time import time
 from discord.ext import commands
 from settings import settings
-import finctions
 
 client = commands.Bot(command_prefix=settings['prefix'])
 
@@ -28,7 +27,7 @@ async def clear(ctx, count=None):
     await ctx.trigger_typing()
 
     # Проверка, ввели ли числа или нет
-    if finctions.may_be_class(count):
+    if str(count).isdigit():
         count = int(count)
     else:
 
@@ -70,7 +69,7 @@ async def coin(ctx, count=None):
     await ctx.trigger_typing()
 
     # Проверка, ввели ли числа или нет
-    if finctions.may_be_class(count):
+    if str(count).isdigit():
         count = int(count)
     else:
 
@@ -155,13 +154,13 @@ async def roll(ctx, roll_first_number=None, roll_second_number=None, count=None)
     # Проверка, что ввели, а что нет
     # То, что не ввели или ввели неверно значения возьмутся по умолчанию
 
-    if finctions.may_be_class(roll_first_number):  roll_first_number = int(roll_first_number)
+    if str(roll_first_number).isdigit(): roll_first_number = int(roll_first_number)
     else:  roll_first_number = 100
 
-    if finctions.may_be_class(roll_second_number):  roll_second_number = int(roll_second_number)
+    if str(roll_second_number).isdigit(): roll_second_number = int(roll_second_number)
     else:  roll_second_number = 1
 
-    if finctions.may_be_class(count): count = abs(int(count))
+    if str(count).isdigit():: count = abs(int(count))
 
     else:  count = 1
 
